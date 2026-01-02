@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(if not exist \"E:\\\\AGents Pic\\\\TodoApp\\\\src\" mkdir \"E:\\\\AGents Pic\\\\TodoApp\\\\src\")",
+      "Skill(sp.phr)",
+      "Bash(if not exist \"history\\\\prompts\\\\update_task\" mkdir \"history\\\\prompts\\\\update_task\")",
+      "Bash(git remote add:*)"
+    ]
+  }
+}
