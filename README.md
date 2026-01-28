@@ -101,13 +101,29 @@ The application uses Better Auth for authentication:
 
 ### Frontend (Next.js) - Vercel
 1. Connect your repository to [Vercel](https://vercel.com/)
-2. Set environment variables in Vercel dashboard
-3. Deploy automatically on push to main branch
+2. Set the Root Directory to `frontend` in Vercel project settings
+3. Set environment variables in Vercel dashboard:
+   - `NEXT_PUBLIC_API_BASE_URL`: Your backend API URL (e.g., https://your-backend.onrender.com)
+4. Deploy automatically on push to main branch
 
-### Backend (FastAPI) - Railway/Hatchbox
-1. Connect your repository to your preferred hosting platform
-2. Set environment variables
-3. Configure the deployment to run `uvicorn main:app`
+### Backend (FastAPI) - Railway/Render
+1. Connect your repository to [Railway](https://railway.app/) or [Render](https://render.com/)
+2. Set the Root Directory to `backend` in the platform settings
+3. Set environment variables:
+   - `DATABASE_URL`: Your Neon Postgres connection string
+   - `BETTER_AUTH_SECRET`: Your JWT secret
+4. Configure the deployment to run `uvicorn src.main:app --host 0.0.0.0 --port $PORT`
+
+### Alternative Deployment Approach
+If you want to deploy the frontend to Vercel while keeping the backend separate:
+
+1. Create a new branch specifically for frontend deployment:
+   ```bash
+   git checkout -b frontend-deploy
+   # Move frontend contents to root (optional)
+   ```
+
+2. Or configure Vercel to use the `frontend` directory as the root for building.
 
 ## Contributing
 
