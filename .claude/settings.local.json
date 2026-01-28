@@ -5,7 +5,28 @@
       "Bash(if not exist \"E:\\\\AGents Pic\\\\TodoApp\\\\src\" mkdir \"E:\\\\AGents Pic\\\\TodoApp\\\\src\")",
       "Skill(sp.phr)",
       "Bash(if not exist \"history\\\\prompts\\\\update_task\" mkdir \"history\\\\prompts\\\\update_task\")",
-      "Bash(git remote add:*)"
+      "Bash(git remote add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "Bash(dir /s)",
+      "Bash(dir)",
+      "Bash(dir .specify /s:*)",
+      "Bash(dir .specifytemplates /s)",
+      "Bash(dir \".specify\\\\templates\")",
+      "Bash(git fetch --all --prune)",
+      "Bash(dir specs)",
+      "Bash(dir specsfeatures)",
+      "Bash(dir \"specs/features/\" /b)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json -RequireTasks -IncludeTasks)",
+      "Bash(git rev-parse --git-dir)",
+      "Bash(python -m pytest tests/ -v)",
+      "Bash(python -m unittest discover tests/ -v)",
+      "Bash(python -m unittest tests.unit.test_todo_manager -v)",
+      "Bash(python -m unittest tests.integration.test_cli_interface -v)",
+      "Bash(python -m unittest tests.unit.test_todo_manager tests.integration.test_cli_interface -v)",
+      "Bash(dir \"E:\\\\AGents Pic\\\\TodoApp\\\\README.md\")",
+      "Bash(git add .)"
     ]
   }
 }

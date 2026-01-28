@@ -1,147 +1,127 @@
-# Todo-application-by-Claude
+# TodoApp - Full-Stack Application
 
-A Spec-Driven Development (SDD) Todo Application built with Claude Code, featuring reusable intelligence agents, architectural governance, and test-driven workflows.
-
-## Project Overview
-
-This project demonstrates modern AI-assisted software development using Claude Code with Spec-Kit Plus methodology. It includes:
-
-- **Constitution-based governance** - Clear architectural principles and decision-making framework
-- **Intelligence agents** - Reusable subagents for spec creation, task management, planning, and implementation
-- **Spec-driven workflow** - Full artifact generation (spec.md, plan.md, tasks.md) from feature descriptions
-- **Console test runner** - Automated test execution and validation
-- **Architectural Decision Records (ADRs)** - Documented significant decisions with rationale
+A modern full-stack todo application built with Next.js, FastAPI, SQLModel, Better Auth, and Neon Postgres.
 
 ## Features
 
-- [x] Add Task - Create new todo items
-- [ ] View Task List - Display all tasks
-- [ ] Update Task - Modify existing tasks
-- [ ] Delete Task - Remove completed items
+- ✅ Multi-user support with secure authentication
+- ✅ JWT-based authentication with Better Auth
+- ✅ Complete CRUD operations for todos
+- ✅ User data isolation and privacy
+- ✅ Responsive frontend with Next.js
+- ✅ RESTful API with FastAPI
+- ✅ SQLModel for database modeling
+- ✅ Neon Postgres for cloud database
+- ✅ Monorepo structure with workspaces
+
+## Tech Stack
+
+- **Frontend**: Next.js 14+ with App Router
+- **Backend**: FastAPI with Python 3.9+
+- **Database**: Neon Postgres (SQLModel/SQLAlchemy)
+- **Authentication**: Better Auth with JWT
+- **Monorepo**: npm workspaces
+- **Deployment**: Vercel (frontend), Railway/Hatchbox (backend)
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18+)
+- [npm](https://www.npmjs.com/) (v8+)
+- [UV](https://github.com/astral-sh/uv) (Python package manager)
+- [Python](https://www.python.org/) (v3.9+)
+
+## Setup Instructions
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/todoapp.git
+   cd todoapp
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   # Install root dependencies and workspace dependencies
+   npm run setup
+   ```
+
+3. **Set up environment variables:**
+   ```bash
+   # Copy the example .env file and update values
+   cp .env.example .env
+   ```
+
+   Update the `.env` file with your actual database URL and auth secret:
+   - `DATABASE_URL`: Your Neon Postgres connection string
+   - `BETTER_AUTH_SECRET`: A secure random secret for JWT signing
+
+4. **Run the development servers:**
+   ```bash
+   # Start both frontend and backend in development mode
+   npm run dev
+   ```
+
+   The applications will start on:
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+
+## Development Scripts
+
+- `npm run setup` - Install all dependencies for root, frontend, and backend
+- `npm run dev` - Start both frontend and backend development servers
+- `npm run dev:frontend` - Start only the frontend development server
+- `npm run dev:backend` - Start only the backend development server
+- `npm run build` - Build the frontend application
+- `npm run start` - Start both applications in production mode
 
 ## Project Structure
 
 ```
-TodoApp/
-├── .specify/              # SpecKit Plus templates and configuration
-│   ├── memory/
-│   │   └── constitution.md     # Project governance principles
-│   └── templates/
-├── specs/                 # Feature specifications and plans
-│   ├── AddTask/
-│   │   ├── spec.md              # User stories and acceptance criteria
-│   │   ├── plan.md              # Architecture and API design
-│   │   └── tasks.md             # Testable implementation tasks
-├── src/                   # Implementation code
-├── history/               # Prompt History Records (PHRs)
-│   ├── prompts/                 # Full conversation transcripts
-│   └── adr/                     # Architecture Decision Records
-└── README.md              # This file
+todoapp/
+├── .env                    # Environment variables
+├── package.json           # Root package with workspaces
+├── README.md              # This file
+├── frontend/              # Next.js frontend application
+└── backend/               # FastAPI backend application
 ```
 
-## Getting Started
+## Database Setup
 
-### Prerequisites
+1. Sign up for a [Neon account](https://neon.tech/)
+2. Create a new project
+3. Copy the connection string and add it to your `.env` file as `DATABASE_URL`
 
-- Node.js (v18 or higher recommended)
-- Git
-- Claude Code CLI
+## Authentication
 
-### Installation
+The application uses Better Auth for authentication:
+- Users can register and login securely
+- JWT tokens are used for session management
+- Protected routes ensure user data isolation
 
-```bash
-# Clone the repository
-git clone https://github.com/majidali321/Todo-application-by-Claude.git
-cd Todo-application-by-Claude
+## Deployment
 
-# Install dependencies (if package.json exists)
-npm install
-```
+### Frontend (Next.js) - Vercel
+1. Connect your repository to [Vercel](https://vercel.com/)
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
 
-### Running Tests
-
-```bash
-# Run console test runner
-npm test
-# or
-node tests/test-runner.js
-```
-
-### Using Claude Code
-
-The project is designed to work with Claude Code CLI and its Spec-Kit Plus workflow:
-
-```bash
-# Create new spec from feature description
-/sp.specify "User can view their task list sorted by due date"
-
-# Generate implementation plan
-/sp.plan
-
-# Create actionable tasks
-/sp.tasks
-
-# Execute implementation
-/sp.implement
-
-# Document architectural decisions
-/sp.adr "Authentication Strategy"
-```
-
-## Development Workflow
-
-1. **Define Feature** - Describe user stories in natural language
-2. **Generate Spec** - Run `/sp.specify` to create spec.md with acceptance criteria
-3. **Create Plan** - Run `/sp.plan` to design architecture and APIs
-4. **Define Tasks** - Run `/sp.tasks` to break down implementation
-5. **Implement** - Run `/sp.implement` to execute tasks
-6. **Document Decisions** - Use `/sp.adr` for significant architectural choices
-7. **Commit & Push** - Track progress with git
-
-## Architecture
-
-### Core Principles
-
-- **Explicit over implicit** - All behavior documented in specs
-- **Smallest viable change** - Minimal, testable increments
-- **Human as tool** - Clarify ambiguous requirements before proceeding
-- **Architecture governance** - Constitution defines principles, ADRs document deviations
-
-### Intelligence Agents
-
-The project includes reusable agents for:
-- **spec-writer** - Converts feature descriptions into formal specs
-- **sqlmodel-schema-designer** - Designs database models
-- **task-manager** - Implements Todo CRUD operations
-- **frontend-component-builder** - Generates Next.js components
-- **code-reviewer** - Validates quality and spec compliance
+### Backend (FastAPI) - Railway/Hatchbox
+1. Connect your repository to your preferred hosting platform
+2. Set environment variables
+3. Configure the deployment to run `uvicorn main:app`
 
 ## Contributing
 
-Contributions should follow the Spec-Driven Development methodology:
-
-1. Create a feature spec in `specs/<feature-name>/spec.md`
-2. Generate plan and tasks using Claude Code agents
-3. Implement with test coverage
-4. Document architectural decisions with ADRs
-5. Create PHRs for all significant interactions
-
-## Hackathon Reference
-
-This project was developed for the AI Hackathon demonstrating:
-- AI-assisted full-stack development
-- Spec-driven architecture
-- Reusable agent workflows
-- Automated governance and documentation
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'Add amazing feature'`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
 
 ## License
 
-MIT License - See LICENSE file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
+## Support
 
-Built with [Claude Code](https://claude.com/claude-code) using Spec-Kit Plus methodology.
-
----
-
-**Note**: This is Phase I of the Todo Application, focusing on the AddTask feature. Additional features (View, Update, Delete) will be added following the same spec-driven workflow.
+If you encounter any issues, please open an issue in the GitHub repository or contact the maintainers.

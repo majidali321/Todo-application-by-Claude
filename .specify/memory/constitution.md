@@ -1,55 +1,43 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- SYNC IMPACT REPORT
+Version change: N/A → 1.0.0
+Modified principles: N/A (new constitution)
+Added sections: All principles and sections
+Removed sections: N/A
+Templates requiring updates: ⚠ pending - .specify/templates/plan-template.md, .specify/templates/spec-template.md, .specify/templates/tasks-template.md
+Follow-up TODOs: None
+-->
+# TodoApp Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### SPEC-DRIVEN DEVELOPMENT
+All features must be specified before implementation using the spec-driven workflow. Specifications must include user stories, acceptance criteria, and detailed requirements before any code is written.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### REUSABLE INTELLIGENCE
+Code components must be designed as reusable, modular units with clear interfaces. Methods should follow clean code principles with type hints, comprehensive documentation, and defensive programming practices.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### CLEAN CODE STANDARDS
+All code must follow clean code principles with proper type hints, comprehensive documentation (docstrings), and single responsibility. Methods must have clear input/output contracts and be independently testable.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### DEFENSIVE PROGRAMMING
+Robust error handling and input validation must be implemented. Validate all inputs before modifying state, ensure proper error messages, and protect critical data integrity.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### TEST-FIRST APPROACH
+Test-driven development is mandatory: write tests first, ensure they fail, then implement code to make them pass. Follow the Red-Green-Refactor cycle strictly.
 
-### [PRINCIPLE_6_NAME]
+### ARCHITECTURAL GOVERNANCE
+All significant architectural decisions must be documented as Architecture Decision Records (ADRs). Follow the three-part test for ADR significance: impact, alternatives, scope.
 
+## Security Requirements
 
-[PRINCIPLE__DESCRIPTION]
+Never hardcode secrets or tokens; use .env files and documentation. Follow security best practices for all user inputs and data handling.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Development Workflow
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Use the Spec-Driven Development workflow: /sp.specify → /sp.plan → /sp.tasks → /sp.implement. Create PHRs for all significant interactions and follow the human-as-tool strategy for clarifications.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+All implementations must comply with the principles in this constitution. Amendments require documentation and proper versioning. The constitution supersedes all other practices. All code must reference this constitution in specifications.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-01-20 | **Last Amended**: 2026-01-20

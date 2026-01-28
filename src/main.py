@@ -1,34 +1,25 @@
-# Enhanced console runner with menu for Add, View, Mark Complete, Update
-
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from todo_manager import TodoManager
 
 
 def display_tasks(manager: TodoManager) -> None:
-    """Display all tasks with completion status indicators."""
-    tasks = manager.view_tasks()
+    """Display all tasks in the format: [ID] - [Description]"""
+    tasks = manager.list_tasks()
 
     if not tasks:
-        print("\nNo tasks yet.")
+        print("No tasks.")
         return
 
-    print("\n--- Tasks ---")
     for task in tasks:
-        status = "[x]" if task['completed'] else "[ ]"
-        desc = f" - {task['description']}" if task['description'] else ""
-        print(f"{status} [{task['id']}] {task['title']}{desc}")
-    print(f"Total: {len(tasks)} task(s)")
+        print(f"{task['id']} - {task['description']}")
 
 
 def main():
-    """Run the TodoApp console interface with menu options."""
-    print("=== TodoApp Console ===")
-    print("Commands:")
-    print("  (a)dd    - Add a new task")
-    print("  (v)iew   - View all tasks")
-    print("  (m)ark   - Mark a task complete/incomplete")
-    print("  (u)pdate - Update a task")
-    print("  (q)uit   - Exit the application")
-    print()
+    """Run the CLI Todo Application."""
+    print("Welcome to the CLI Todo Application!")
+    print("Available commands: add, list, delete, exit")
 
     # Create TodoManager instance
     manager = TodoManager()
@@ -37,87 +28,65 @@ def main():
     while True:
         try:
             # Prompt for command
-            command = input("\nCommand (a/v/m/u/q): ").strip().lower()
+            user_input = input("> ").strip()
+
+            # Parse command and arguments
+            parts = user_input.split(' ', 1)
+            command = parts[0].lower()
+
+            if len(parts) > 1:
+                args = parts[1]
+            else:
+                args = ""
 
             # Add task
-            if command == 'a':
-                title = input("Task title: ").strip()
-                if not title:
-                    print("Error: Title cannot be empty")
+            if command == 'add':
+                if not args:
+                    print("Error: Task description cannot be empty")
                     continue
 
-                description = input("Description (optional, press Enter to skip): ").strip()
-                task = manager.add_task(title, description)
-                print(f"\nTask added with ID: {task['id']}")
-
-            # View tasks
-            elif command == 'v':
-                display_tasks(manager)
-
-            # Mark task complete/incomplete
-            elif command == 'm':
-                display_tasks(manager)
-
-                task_id_input = input("\nEnter task ID to toggle: ").strip()
                 try:
-                    task_id = int(task_id_input)
-                    updated_task = manager.mark_complete(task_id)
-                    new_status = "complete" if updated_task['completed'] else "incomplete"
-                    print(f"\nTask {task_id} marked as {new_status}")
-                except ValueError:
-                    print(f"Error: Invalid task ID '{task_id_input}' - must be a number")
-
-            # Update task
-            elif command == 'u':
-                display_tasks(manager)
-
-                task_id_input = input("\nEnter task ID to update: ").strip()
-                try:
-                    task_id = int(task_id_input)
-                except ValueError:
-                    print(f"Error: Invalid task ID '{task_id_input}' - must be a number")
-                    continue
-
-                title = input("New title (optional, press Enter to skip): ").strip()
-                description = input("New description (optional, press Enter to skip): ").strip()
-
-                try:
-                    updated_task = manager.update_task(
-                        task_id=task_id,
-                        title=title if title else None,
-                        description=description if description else None
-                    )
-                    print(f"\nTask {task_id} updated:")
-                    print(f"  Title: {updated_task['title']}")
-                    print(f"  Description: {updated_task['description'] if updated_task['description'] else '(empty)'}")
-                    print(f"  Status: {'Complete' if updated_task['completed'] else 'Incomplete'}")
+                    task = manager.add_task(args)
+                    print(f"Added task #{task['id']}: {task['description']}")
                 except ValueError as e:
-                    print(f"\nError: {e}")
+                    print(f"Error: {e}")
 
-            # Quit
-            elif command == 'q':
-                print("\nExiting...")
+            # List all tasks
+            elif command == 'list':
+                display_tasks(manager)
+
+            # Delete task
+            elif command == 'delete':
+                if not args:
+                    print("Error: Please provide a task ID to delete")
+                    continue
+
+                try:
+                    task_id = int(args)
+                    result = manager.delete_task(task_id)
+                    if result:
+                        print(f"Deleted task #{task_id}")
+                    else:
+                        print(f"Error: Task with ID {task_id} not found")
+                except ValueError:
+                    print(f"Error: Invalid task ID '{args}' - must be a number")
+                except TypeError as e:
+                    print(f"Error: {e}")
+
+            # Exit application
+            elif command == 'exit':
+                print("Goodbye!")
                 break
 
             # Unknown command
             else:
-                print(f"Unknown command: '{command}' - Use a/v/m/u/q")
+                print(f"Unknown command: '{command}'. Available commands: add, list, delete, exit")
 
-        except ValueError as e:
-            print(f"\nError: {e}")
-        except TypeError as e:
-            print(f"\nError: {e}")
         except KeyboardInterrupt:
-            print("\n\nExiting...")
+            print("\nGoodbye!")
             break
         except Exception as e:
-            print(f"\nUnexpected error: {e}")
-
-    # Display final summary
-    print(f"\nFinal task count: {len(manager.tasks)}")
-    if manager.tasks:
-        print("\nAll tasks:")
-        display_tasks(manager)
+            print(f"Error: {e}")
 
 
 if __name__ == "__main__":
